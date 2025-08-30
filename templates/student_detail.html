@@ -1,0 +1,94 @@
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon">
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <title> {{ student["name"] }} | Teacher's Pet</title>
+
+    </head>
+
+    <body>
+<div class="center">
+      
+
+    <h1 class="login-title">Student: {{ student["name"] }}</h1>
+    <h2 class="login-title">Class: {{ student["class_name"] }}</h2>
+      <div id="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="flash-message">
+                            {{ msg }}
+                            <span class="close-btn" onclick="this.parentElement.remove()">x</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    <div class="inclass-container">
+        <div class="inclass-column ">  
+            <h2 class="inclass-column-title">Exams</h2>
+            {% if exams %}
+                <table class="enp-list">
+            
+                    {% for exam in exams %}
+                    <tr class=" enp-tile student-detail-tile tooltip">
+                        <td class="student-name">{{ exam["name"] }}</td>
+                        <td class="student-name">
+                            
+                            <img class="icon" src="{{ url_for('static', filename='date.png') }}" alt="">
+                            <span class="tooltip-text">{{ exam["date"] }}</span> 
+                            
+                        </td>
+                        <td class="student-name">{{ results.get(exam["id"], "N/A") }}</td>
+                        <td class="student-name">
+                            {% if results.get(exam["id"]) %}
+                            <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                <input type="hidden" name="remove_result_exam_id" value="{{ exam['id'] }}">
+                                <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                            </form>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No exams for this student yet.</p>
+            {% endif %}
+        </div>  
+
+        <div class="inclass-column ">
+    <h2 class="inclass-column-title">Student Notes</h2>
+    
+    <ul class="enp-list">
+        {% for note in student_notes %}
+            <li class="enp-tile">
+                <div class="enp-element lesson-plan-element"> {{ note["content"] }} </div>
+
+                <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                    <input type="hidden" name="remove_note_id" value="{{ note['id'] }}">
+                    <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <form class="enp-form" method="POST">
+        <div class="class-create">
+        <textarea class="input1 class-input" name="student_note" placeholder="Add note..." required></textarea>
+        <button class="class-button" type="submit">Add Note</button>
+        </div>
+    </form>
+    </div>
+   
+</div>
+<button class="score-button" onclick="window.close()">Close</button>

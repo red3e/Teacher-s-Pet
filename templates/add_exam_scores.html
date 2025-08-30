@@ -1,0 +1,68 @@
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon">
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <title> {{ exam["name"] }} | Teacher's Pet</title>
+
+    </head>
+
+    <body>
+
+<h1 class="login-title">{{ exam["name"] }} / {{ exam["date"] }}</h1>
+<h2 class="login-title">Class: {{ class_row["name"] }}</h2>
+
+<div class="center">     
+        <div id="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="flash-message">
+                            {{ msg }}
+                            <span class="close-btn" onclick="this.parentElement.remove()">x</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+    <form class="login-form" method="POST">
+        <table>
+            <tr>
+                <th>Student</th>
+                <th>Score</th>
+            </tr>
+        {% for student in students %}
+    <tr>
+        
+            <td class="form-title">{{ student["name"] }}</td>
+            <td>
+                <input class="input2" type="text" name="score_{{ student['id'] }}" value="{{ results.get(student['id'], '') }}">
+            </td>       
+    </tr>
+            {% endfor %}
+        </table>
+        <div>
+        <button class="score-button" type="submit">Save</button>
+        <button class="score-button" onclick="window.close()">Close</button>
+        </div>
+    </form>
+</div>
+<br>
+{% if success %}
+<script>
+    // Refresh parent page and close popup
+    window.opener.location.reload();
+    window.close();
+</script>
+{% endif %}
+</body>

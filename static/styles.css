@@ -1,0 +1,620 @@
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remove default margin */
+  * {
+    margin: 0;
+  }
+  
+  /* 3. Enable keyword animations */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      interpolate-size: allow-keywords;
+    }
+  }
+  
+  body {
+    /* 4. Add accessible line-height */
+    line-height: 1.5;
+    /* 5. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* 6. Improve media defaults */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 7. Inherit fonts for form controls */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 8. Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* 9. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  /*
+    10. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  /*    RESET END   */
+
+body{
+  background-color: rgb(248, 249, 253);
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+.icon{
+  width: 20px;
+  height: 20px;
+}
+#layout{
+  background-color: white;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+}
+.layout-box{
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.menu{
+ 
+  display: flex;
+  align-items: center; /* vertically center all li contents */
+  gap: 20px;           /* space between items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+.menu li{
+  display: inline-block;
+}
+.menu-item {
+    display: flex;
+    align-items: center;   /* vertically center icon & text */
+    gap: 6px;              /* space between icon and text */
+    text-decoration: none; /* optional: remove underline */
+    margin-left: 20px;
+   
+  }
+
+a {
+  color: rgb(255, 100, 0);      
+  text-decoration: none; 
+  font-weight: bold;
+}
+.center{
+  width: 100%;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.logo-box{
+  padding: 10px;
+  padding-top:25px;
+  width: 500px;
+ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.logo-img{
+  width: 90px;
+  height: 90px;
+}
+.layout-logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.site-title{
+  font-size: 40px;
+  font-weight: 500;
+}
+.login-box {
+  
+  border-radius:10px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  margin-top: 30px;
+  width: 500px;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+
+}
+
+.login-title{
+  text-align: center;
+  color: rgb(250, 100, 0);
+ 
+}
+
+.login-title-svg{
+  height: 75px;
+  width: 75px;
+  fill: rgb(250, 100, 0);
+}
+
+.login-text{
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: 200;
+  
+}
+.form-title{
+  align-self: flex-start;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+#sign-in-text{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 200;
+ 
+  
+}
+.input1{
+  height: 50px;
+  width: 100%;
+  border: 1px solid rgb(250, 100, 0);
+  border-radius:5px;
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.input1:focus{
+  outline: none;
+  border: 3px solid rgb(250, 100, 0);
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+}
+.input2{
+  height: 30px;
+  width: 100%;
+  border: 1px solid rgb(250, 100, 0);
+  border-radius:5px;
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  font-size: 14px;
+  font-weight: 100;
+  align-self: start;
+
+}
+
+.input2:focus{
+  outline: none;
+  border: 1px solid rgb(250, 100, 0);
+  box-shadow: none;
+}
+
+.login-button{
+  background-color: rgb(250, 100, 0);
+  height: 50px;
+  width: 100px;
+  border: 1px solid rgb(250, 100, 0);
+  border-radius:5px;
+  align-self: flex-end;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  margin-top: 20px;
+  font-weight: 800;
+}
+.login-button:hover{
+    background-color: rgba(250, 100, 0,.9);
+    cursor: pointer;
+}
+.message{
+  border: 3px solid rgb(250, 0, 0);
+  border-radius:5px;
+  background-color: rgb(250, 100, 0);
+  margin: 10px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.class-container{
+ display: flex;
+  flex-wrap: wrap;       
+  width: 100%;
+  max-width: 1200px;
+  justify-content: center;
+  margin-top:50px;
+  gap: 10px;
+}
+.classes-page-title{
+  margin-top: 50px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;              
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+.class-tile{
+  position: relative;
+  flex: 1 1 calc(25% - 1rem); 
+  max-width: calc(25% - 1rem);
+  min-width: 290px;     
+  height: 100px;      
+  text-align: left;
+  display: flex;              
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  border-radius:5px;
+  
+ 
+
+}
+.class-name-box{
+  width: 290px;
+  height: 100px;
+  padding: 15px;
+  display: flex;  
+   flex-direction: column;
+  justify-content:space-between;
+          
+
+}
+.class-tile-detail{
+  width: 75%;
+  font-weight: 100;
+  font-size: 12;
+  color: black;
+  display: flex;  
+  flex-direction: row;
+  justify-content:space-between;
+  gap: 10px
+
+}
+.detail-element{
+  display: flex;  
+  flex-direction: row;
+  justify-content: none;
+ 
+}
+.class-create{
+display: flex;
+flex-direction: row;
+width: 250px;
+}
+
+.class-input{
+  border-radius:5px 0px 0px 5px;
+  border-right:none;
+}
+.class-input:focus{
+  border: 1px solid rgb(250, 100, 0);
+  border-right: none;
+  box-shadow: none;
+}
+.class-button{
+  background-color: rgb(236, 236, 236);
+  height: 50px;
+  border: 1px solid rgb(250, 100, 0);
+  border-left: none;
+  border-radius:0px 5px 5px 0px;
+  align-self: flex-end;
+  
+  font-weight: 800;
+}
+.class-button:hover{
+    background-color: rgba(250, 100, 0,.9);
+    cursor: pointer;
+    
+}
+.remove-button {
+  position: absolute;
+  top: 5px;          /* distance from the top of the tile */
+  right: 5px; 
+  background: none;
+  border: none;
+  
+  cursor: pointer;
+  line-height: 1;
+  
+  margin: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+  opacity: .5;
+}
+
+.remove-button:hover {
+  color: #b71c1c;        /* darker red on hover */
+  transform: scale(1.2); /* slight zoom */
+}
+
+.remove-button:focus {
+  outline: none;
+  color: #b71c1c;
+}
+
+.tooltip {
+  position: relative;
+  z-index: 10000;
+  
+}
+
+.tooltip .tooltip-text {
+  position: absolute;
+  display: none;
+  opacity: 0;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 10000;
+  bottom: 50%; 
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition: opacity 0.1s; /* makes it appear instantly */
+}
+
+.tooltip:hover .tooltip-text {
+  display: inline-block;
+  opacity: 1;
+}
+.inclass-container{   
+  width: 100%;
+max-width: 1200px;
+display: flex;
+flex-wrap: wrap;   
+flex-direction: row;
+align-items: flex-start;
+justify-content: center;
+gap:10px;
+
+}
+.inclass-column{
+ 
+  flex: 1 1 calc(25% - 1rem); 
+  max-width: calc(25% - 1rem);
+  min-width: 290px;         
+  padding: 10px;
+  margin-top: 20px;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  border-radius:5px;  
+}
+.inclass-column-title{
+  display: flex;
+  justify-content: center;
+  color: rgb(255, 100, 0);
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.inclass-students{
+  
+  background-color:rgba(255, 100, 0, .3);
+}
+
+.student-list{
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  max-height: 400px;   /* adjust as needed */
+  overflow-y: auto;  
+  
+  
+}
+.student-tile{
+  display: flex;              
+  align-items: center;
+  justify-self: center;
+  position: relative;
+  height: 50px;
+  width: 90%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  margin-top: 10px;
+
+}
+.student-name{
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px; 
+  padding-left: 20px;
+  display: flex;              
+  align-items: center;
+  justify-self: center;
+}
+
+.student-add {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;              
+  align-items: center;
+  justify-content: center;
+}
+
+#flash-messages{
+  align-self: center;
+}
+.flash-message {
+    align-items: center;
+    top: 20px;
+    right: 20px;
+    background-color: rgb(255, 100, 0); /* green for success */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.5s;
+    z-index: 1000;
+}
+.flash-message.hide {
+    opacity: 0;
+}
+.close-btn {
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.enp-list{
+  display: flex;              
+   align-items: stretch;   /* full width */
+  justify-content: flex-start; /* items from top */
+  flex-direction: column;  
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  text-decoration: none;
+  max-height: 400px;   /* adjust as needed */
+  overflow-y: auto;  
+  flex-grow: 1;  
+  
+}
+.enp-form{
+  margin-top: 30px;
+  width: 100%;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+.enp-tile{
+  position: relative;
+  display: flex; 
+  flex-direction: row;             
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  width: 100%;
+  margin-top: 10px; 
+ 
+
+}
+
+.enp-element{
+  width: 100%;
+  display: flex; 
+  flex-direction: row;             
+  align-items: center;
+  justify-self: center;
+  justify-content: left;
+  gap: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+  background-color: white;
+  height: 50px;
+  
+}
+.score{
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 40px;
+  border-radius: 5px;
+  background-color: rgb(255, 100, 0);
+  height: 20px;
+  width: 100px;
+  text-align: center;
+}
+.score:hover{
+box-shadow: 2px 4px 10px rgb(187, 187, 187);
+}
+.lesson-plan-element{
+  padding: 20px;
+  height: auto;
+  
+  word-wrap: break-word; 
+  
+}
+
+.score-button{
+  background-color: rgb(250, 100, 0);
+  height: 50px;
+  width: 100px;
+  border: 1px solid rgb(250, 100, 0);
+  border-radius:5px;
+  margin-top: 20px;
+  box-shadow: 2px 4px 10px rgb(187, 187, 187);
+  font-weight: 800;
+}
+.score-button:hover{
+    background-color: rgba(250, 100, 0,.9);
+    cursor: pointer;
+}
+.student-detail-tile{
+  display: flex;              
+  align-items: center;
+  justify-self: center;
+  justify-content: space-between;
+  position: relative;
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 10px;
+
+}
+.student-detail-tile td.student-name:nth-child(1) {
+    width: 50%; /* Exam name */
+}
+
+.student-detail-tile td.student-name:nth-child(2) {
+    width:  25%; /* Date */
+}
+
+.student-detail-tile td.student-name:nth-child(3) {
+    width:  30%; /* Score */
+}
+
+.student-detail-tile td.student-name:nth-child(4) {
+    width:  1%; /* Action */
+}
+
+.student-detail-tile td.student-name {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Cut off overflowing content */
+    text-overflow: ellipsis; /* Show ... for long text */
+}

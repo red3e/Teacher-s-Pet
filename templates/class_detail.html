@@ -1,0 +1,171 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ class_row["name"] }}
+{% endblock %}
+
+{% block main %}
+<div class="center">
+
+    <div class="classes-page-title">
+        <h1 class="login-title">Class: {{ class_row["name"] }}</h1>  
+        <a href="/class">← Back to Classes</a>
+        
+        <div id="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="flash-message">
+                            {{ msg }}
+                            <span class="close-btn" onclick="this.parentElement.remove()">x</span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+     <br>
+    
+    <div class="inclass-container">
+            
+    
+        <div class="inclass-column inclass-students">
+            <h2 class="inclass-column-title">Students</h3>
+            <ul class="student-list">
+                {% for student, _ in students_with_notes %}
+                    <li>
+                        <div class="student-tile">
+
+                            <a style="width:100%" href="{{ url_for('student_detail', student_id=student['id']) }}"onclick="
+                            const w = 700, h = 600;
+                            const left = window.screenX + (window.outerWidth - w) / 2;
+                            const top = window.screenY + (window.outerHeight - h) / 2;
+                            const popup = window.open(
+                                this.href,
+                                'popup',
+                                `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
+                            );
+                            if (popup) popup.focus(); // brings it to front
+                            return false;"> 
+                                <div class="student-name">{{ student["name"] }}</div>
+                            </a>
+                            <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                <input type="hidden" name="remove_id" value="{{ student['id'] }}">
+                                <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                            </form>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+             <div class="student-add">
+                <form class="login-form class-create" method="POST" >
+                    <input class="input1 class-input" autocomplete="off" name="name" placeholder="Student Name" type="text" required>
+                    <button class="class-button" type="submit">Add</button>
+                </form>
+            </div>
+        </div>
+
+     
+        <div class="inclass-column">
+            <h2 class="inclass-column-title">Exams</h2>
+           
+            <ul class="enp-list">
+                {% for exam in exams %}
+                    <li class="enp-tile">
+                        <div class="enp-element">
+                            <div class="enp-element tooltip">
+                            {{ exam["name"] }} 
+                            <img class="icon" src="{{ url_for('static', filename='date.png') }}" alt="">
+                            <span class="tooltip-text">{{ exam["date"] }}</span> 
+                            </div>
+                        <a class="score" href="{{ url_for('add_exam_scores', exam_id=exam['id']) }}" onclick="
+                            const w = 500, h = 1000;
+                            const left = window.screenX + (window.outerWidth - w) / 2;
+                            const top = window.screenY + (window.outerHeight - h) / 2;
+                            const popup = window.open(
+                                this.href,
+                                'popup',
+                                `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`
+                            );
+                            if (popup) popup.focus(); // brings it to front
+                            return false;
+                        ">Score</a> 
+                        </div>
+                        <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                            <input type="hidden" name="remove_exam_id" value="{{ exam['id'] }}">
+                            <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+             <form class="enp-form" method="POST">
+                <div><input class="input2" type="date" name="exam_date"></div>
+
+                <div class="class-create">
+                    <input class="input1 class-input" type="text" name="exam_name" placeholder="Exam Name" required>
+                    <button class="class-button" type="submit">Add</button>
+                </div>
+            </form>
+        </div>  
+
+        <div class="inclass-column">
+            <h2 class="inclass-column-title">Lesson Plans</h2>
+            
+            <ul class="enp-list">
+                {% for lp in lesson_plans %}
+                    <li class="enp-tile">
+                        <div class="enp-element lesson-plan-element">   
+                           <div> <b>{{  lp["date"] }} </b>: {{ lp["content"] }}</div>   
+                        </div>
+                        
+                        <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                            <input type="hidden" name="remove_lesson_id" value="{{ lp['id'] }}">
+                            <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                        </form>
+                        
+                    </li>
+                {% endfor %}
+            </ul>
+            <form class="enp-form" method="POST">
+                <div><input class="input2" type="date" name="lesson_date" required></div>
+
+                <div class="class-create">
+                <textarea class="input1 class-input" name="lesson_content" placeholder="Lesson content..." required></textarea>
+                <button class="class-button" type="submit">Add</button>
+                </div>
+            </form>
+         </div>  
+          
+         <div class="inclass-column">
+            <h2 class="inclass-column-title">Class Notes</h2>
+        
+            <ul class="enp-list">
+                {% for note in class_notes %}
+                    <li class="enp-tile">
+                        <div class="enp-element lesson-plan-element"> 
+                        {{ note["content"] }} 
+                        </div>
+
+                        <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                            <input type="hidden" name="remove_class_note_id" value="{{ note['id'] }}">
+                            <button type="submit" class="remove-button"><img class="icon" src="{{ url_for('static', filename='remove.png') }}" alt=""></button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+             <form class="enp-form" method="POST">
+                <div class="class-create">
+                <textarea class="input1 class-input" name="class_note" placeholder="Add class note..." required></textarea>
+                <button class="class-button" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    
+
+   
+
+</div>
+{% endblock %}
