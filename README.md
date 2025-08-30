@@ -1,5 +1,4 @@
 # Teacher's Pet
-#### Video Demo:  [<https://www.youtube.com/watch?v=9TLtvSzYl_I>]
 #### Description: A website that helps teachers organize and manage their classes.
 
 **Teacher's Pet** is a classroom management system I built to make teachers’ lives a little easier. The idea behind the project is simple: instead of juggling papers, spreadsheets, and sticky notes, teachers can have everything about their classes organized in one place. From adding students to tracking exam results and planning lessons, this system helps keep everything neat and accessible.  
